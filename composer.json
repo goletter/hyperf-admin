@@ -1,0 +1,47 @@
+{
+    "name": "goletter/hyperf-admin",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "goletter",
+            "email": "goletter@outlook.com"
+        }
+    ],
+    "keywords": [
+        "php",
+        "hyperf",
+        "admin"
+    ],
+    "description": "Admin for Hyperf.",
+    "autoload": {
+        "psr-4": {
+            "Goletter\\Admin\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "HyperfTest\\": "tests"
+        }
+    },
+    "require": {
+        "php": ">=8.0",
+        "goletter/hyperf-modelfilter": "^1.0",
+        "hyperf/collection": "^3.1",
+        "hyperf/http-server": "^3.1",
+        "hyperf/validation": "^3.1"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "test": "co-phpunit -c phpunit.xml --colors=always",
+        "analyse": "phpstan analyse --memory-limit 300M -l 5 ",
+        "cs-fix": "php-cs-fixer fix $1"
+    },
+    "extra": {
+        "hyperf": {
+            "config": "Goletter\\Admin\\ConfigProvider"
+        }
+    }
+}
