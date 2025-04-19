@@ -16,8 +16,13 @@ class RoleController extends BaseController
 
     public function store(RoleRequest $request)
     {
+        $data = $request->all();
+        if (isset($data['parent_id'])) {
+            $level = Role::query()->where('id', $data['parent_id'])->value('level');
+            $data['level'] = $level + 1;
+        }
         $role = new Role();
-        $role->fill($request->all());
+        $role->fill($data);
         $role->save();
 
         return $this->success($role);
@@ -26,7 +31,13 @@ class RoleController extends BaseController
     public function update(RoleRequest $request, int $id)
     {
         $role = Role::query()->where('id', $id)->first();
-        $role->fill($request->all());
+
+        $data = $request->all();
+        if (isset($data['parent_id'])) {
+            $level = Role::query()->where('id', $data['parent_id'])->value('level');
+            $data['level'] = $level + 1;
+        }
+        $role->fill($data);
         $role->save();
 
         return $this->success();
