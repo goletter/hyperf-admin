@@ -16,8 +16,13 @@ class PermissionController extends BaseController
 
     public function store(PermissionRequest $request)
     {
+        $data = $request->all();
+        if (isset($data['parent_id'])) {
+            $level = Permission::query()->where('id', $data['parent_id'])->value('level');
+            $data['level'] = $level + 1;
+        }
         $permission = new Permission();
-        $permission->fill($request->all());
+        $permission->fill($data);
         $permission->save();
 
         return $this->success($permission);
@@ -26,7 +31,13 @@ class PermissionController extends BaseController
     public function update(PermissionRequest $request, int $id)
     {
         $permission = Permission::query()->where('id', $id)->first();
-        $permission->fill($request->all());
+
+        $data = $request->all();
+        if (isset($data['parent_id'])) {
+            $level = Permission::query()->where('id', $data['parent_id'])->value('level');
+            $data['level'] = $level + 1;
+        }
+        $permission->fill($data);
         $permission->save();
 
         return $this->success($permission);
