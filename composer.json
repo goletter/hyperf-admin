@@ -26,6 +26,7 @@
     },
     "require": {
         "php": ">=8.0",
+        "donjan-deng/hyperf-casbin": "^3.23",
         "goletter/hyperf-modelfilter": "^1.0",
         "hyperf/collection": "^3.1",
         "hyperf/http-server": "^3.1",

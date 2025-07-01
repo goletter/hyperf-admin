@@ -8,6 +8,12 @@ class PermissionResource extends Resource
     {
         $data = parent::toArray();
 
+        if (count($this->resource->children) > 0) {
+            $data['children'] = PermissionResource::collection($this->whenLoaded('children'));
+        } else {
+            unset($data['children']);
+        }
+
         return array_merge($data, []);
     }
 }

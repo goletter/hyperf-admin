@@ -22,6 +22,8 @@ class Permission extends Model
         'keepalive',
     ];
 
+    static public $Ids = [];
+
     public function child(): HasMany
     {
         return $this->hasMany(self::class, 'parent_id')->orderBy('parent_id')->orderBy('sort');

@@ -6,7 +6,7 @@ use Goletter\ModelFilter\ModelFilter;
 
 class RoleFilter extends ModelFilter
 {
-    public function name($name): RoleFilter
+    public function name($name)
     {
         return $this->where('name', 'like', "$name%");
     }
