@@ -1,8 +1,6 @@
 <?php
 namespace Goletter\Admin\Model;
 
-use Hyperf\Database\Model\Relations\HasMany;
-
 class Permission extends Model
 {
     protected array $fillable = [
@@ -23,13 +21,22 @@ class Permission extends Model
     ];
 
     static public $Ids = [];
+    public static function getPermIds($parentId, $permissions)
+    {
+        foreach ($permissions as $permission) {
+            if ($parentId == $permission->id) {
+                self::$Ids = array_unique(array_merge(self::$Ids, [$permission->id]));
+                self::getPermIds($permission->parent_id, $permissions);
+            }
+        }
+    }
 
-    public function child(): HasMany
+    public function child()
     {
         return $this->hasMany(self::class, 'parent_id')->orderBy('parent_id')->orderBy('sort');
     }
 
-    public function children(): HasMany
+    public function children()
     {
         return $this->child()->with('children');
     }
