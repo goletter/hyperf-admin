@@ -4,7 +4,8 @@ namespace Goletter\Admin\Controller;
 use Donjan\Casbin\Enforcer;
 use Goletter\Admin\Model\Permission;
 use Goletter\Admin\Request\PermissionRequest;
-use Illuminate\Support\Arr;
+use Hyperf\Collection\Arr;
+use function Hyperf\Collection\collect;
 
 class PermissionController extends BaseController
 {
@@ -100,5 +101,16 @@ class PermissionController extends BaseController
         $permission->save();
 
         return $this->success($permission);
+    }
+
+    public function batchDelete()
+    {
+        $ids = $this->request->input('ids');
+
+        if (count($ids) > 0) {
+            Permission::query()->whereIn('id', $ids)->delete();
+        }
+
+        return $this->success();
     }
 }

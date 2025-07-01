@@ -4,6 +4,7 @@ namespace Goletter\Admin\Resource;
 
 use Donjan\Casbin\Enforcer;
 use Goletter\Admin\Model\Permission;
+use function Hyperf\Collection\collect;
 
 class RoleResource extends Resource
 {

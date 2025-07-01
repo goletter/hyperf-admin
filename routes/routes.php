@@ -17,4 +17,5 @@ Router::addGroup('/api/admin', function () {
     Router::get('/permissions/index', [\Goletter\Admin\Controller\PermissionController::class, 'index']);
     Router::post('/permissions/store', [\Goletter\Admin\Controller\PermissionController::class, 'store']);
     Router::put('/permissions/{id}', [\Goletter\Admin\Controller\PermissionController::class, 'update']);
+    Router::post('/permissions/batch_delete', [\Goletter\Admin\Controller\PermissionController::class, 'batchDelete']);
 });
